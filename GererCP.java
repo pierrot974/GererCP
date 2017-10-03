@@ -190,8 +190,8 @@ public class GererCP {
 				else{
 					System.out.println("creation " + args[1]);
 					affichEtoile();
-					tableauCP[compteur] = args[1];
-					tableauNomVilles[compteur] = args[2];
+					tableauCP.add (args[1]);
+					tableauNomVilles.add(args[2]);
  					affichListe(tableauCP,tableauNomVilles,position);
 				   
 					
@@ -206,7 +206,7 @@ public class GererCP {
 				if(verifier){
 					System.out.println("modification " + tableauCP.get(position));
 					affichEtoile();
-					tableauNomVilles[position] = args[2] ;
+					tableauNomVilles.set(position, args[2]) ;
 					affichListe(tableauCP,tableauNomVilles,position);
 				}
 				else {
@@ -220,7 +220,7 @@ public class GererCP {
 				
 				if (verifier){
 					
-					System.out.println("effacement de " + tableauCP[position]);
+					System.out.println("effacement de " + tableauCP.get(position));
 					affichEtoile();
 					
 					tableauCP.remove(position);
