@@ -1,14 +1,14 @@
 
 /**
-*La classe GererCP nous permet de gérer un affichage de code postaux et de noms de ville
-*Avec un argument primaire obligatoire et un argument secondaire dépendant du primaire 
+*La classe GererCP nous permet de gÃ©rer un affichage de code postaux et de noms de ville
+*Avec un argument primaire obligatoire et un argument secondaire dÃ©pendant du primaire 
 *
 *Quatres arguments primaires (donc quatre commandes) sont possibles dans ce programme
-* et correspondent à   :
+* et correspondent Ã    :
 *<ul>
-*<li>C pour afficher(créer) une ligne supplémentaire CP + nomville </li>
+*<li>C pour afficher(crÃ©er) une ligne supplÃ©mentaire CP + nomville </li>
 *<li>R pour afficher la correspondance nomVille qui concerne le CP saisi</li>
-*<li>U pour modifier le nomVille a l'affichage de la liste pour le CP concerné</li>
+*<li>U pour modifier le nomVille a l'affichage de la liste pour le CP concernÃ©</li>
 *<li>D pour retirer un CP + nomVille du second affichage de liste.</li>
 *</ul>
 *
@@ -18,6 +18,7 @@
 *
 */
 
+import java.util.ArrayList;
 
 public class GererCP {
 	
@@ -32,8 +33,10 @@ public class GererCP {
 		*stocke les villes correspondants au CP
 		*
 		*/
-		String tableauCP[] = {"97410","97420","97433","97413","97414","","","","",""};
-		String tableauNomVilles[] = {"St-Pierre","Port","Salazie","Cilaos","Entre-Deux","","","","",""};
+		tableauCP = new ArrayList <String>();
+		tableauNomVilles = new ArrayList <String>();
+		tableauCP.add("97410");tableauCP.add("97420");tableauCP.add("97433");tableauCP.add("97413");tableauCP.add("97414");
+		tableauNomVilles.add("St-Pierre");tableauNomVilles.add("Port");tableauNomVilles.add("Salazie");tableauNomVilles.add("Cilaos");tableauNomVilles.add("Entre-Deux");
 		boolean verifier = false ;
 		int position = 0 ;
 		int compteur = 0 ;
@@ -44,7 +47,7 @@ public class GererCP {
 		
 		position = avoirPosition( args,tableauCP);
 		
-		//compteur nous permet de savoir combien d'élément comporte le tableau pour pouvoir en ajouter sans recalculer le nombre d'éléments.
+		//compteur nous permet de savoir combien d'Ã©lÃ©ment comporte le tableau pour pouvoir en ajouter sans recalculer le nombre d'Ã©lÃ©ments.
 		
 		compteur = affichListe(tableauCP,tableauNomVilles,position);
 		
@@ -62,21 +65,23 @@ public class GererCP {
 	*	recup les CP
 	*@param tableauNomVilles
 	*	recup les nomVilles
-	*@return le nombre d'éléments présents dans le tableauCP
+	*@return le nombre d'Ã©lÃ©ments prÃ©sents dans le tableauCP
 	*
 	*/
-	//Ici on doit gérer l'affichage des deux tableaux, et faire cette procédure de telle sorte qu'elle aura un argument nous permettant de selectionner en particulier
-	//un de ses éléments.
+	//Ici on doit gÃ©rer l'affichage des deux tableaux, et faire cette procÃ©dure de telle sorte qu'elle aura un argument nous permettant de selectionner en particulier
+	//un de ses Ã©lÃ©ments.
 	public static int affichListe(String tableauCP[],String tableauNomVilles[],int position ){
 		
 		int compteur = 0 ;
 		
-			for(int ind = 0 ; ind < tableauCP.length ; ind++)
+			for(int ind = 0 ; ind < tableauCP.size() ; ind++)
 			{
-				if(!tableauCP[ind].equals("")){
-					System.out.println ( tableauCP[ind] + " " + tableauNomVilles[ind]);
+					System.out.println ( tableauCP.get(ind) + " " + tableauNomVilles.get(ind));
 					compteur ++;
-				}
+			
+			
+			
+				
 			}
 		
 		return compteur;
@@ -88,17 +93,17 @@ public class GererCP {
 	*
 	* @return la position du Code Postal dans le tableau
 	*/
-	//Ici, dans le cas où le CP est correct , on marque la position de ce dernier dans le tableau de CP pour pouvoir y acceder facilement avec procCRUD() par la suite
+	//Ici, dans le cas oÃ¹ le CP est correct , on marque la position de ce dernier dans le tableau de CP pour pouvoir y acceder facilement avec procCRUD() par la suite
 	public static int avoirPosition(String args[],String tableauCP[]){
 		
 		int ind = 0 ;
 		int positionCP = -1;
 		
-		while (ind < tableauCP.length ){
-			if (args[1].equals(tableauCP[ind]))
+		while (ind < tableauCP.size() ){
+			if (args[1].equals(tableauCP.get(ind)))
 			{
 				positionCP = ind ;
-				ind = tableauCP.length;
+				ind = tableauCP.size();
 				
 			}
 			ind++;
@@ -110,33 +115,39 @@ public class GererCP {
 	
 	
 	/**
-	* @return un booléen qui nous dit si le CP saisi en deuxieme parametre est present dans le tableau
+	* @return un boolÃ©en qui nous dit si le CP saisi en deuxieme parametre est present dans le tableau
 	*
 	*
 	*
 	* @param args
 	* @param tableauCP
 	*/
-	//Verifie que le parametre args[1] est bien present dans le tableau cp. renvoie un résultat booléen
+	//Verifie que le parametre args[1] est bien present dans le tableau cp. renvoie un rÃ©sultat boolÃ©en
 	public static boolean verif(String args[] ,String tableauCP[] ){
 		
 		
 		int ind = 0 ;
 		boolean verifCP = false;
 		
-		while (ind < tableauCP.length)
+		ind = tableauCP.indexOf(args[1]);
+		
+		if (ind > -1 ){
+			verifCP = true;
+		}
+		
+		/*while (ind < tableauCP.size())
 		{
 			
-			if (args[1].equals(tableauCP[ind]))
+			if (args[1].equals(tableauCP.get(ind)))
 			{
 				verifCP = true;
-				ind = tableauCP.length;
+				ind = tableauCP.size();
 			}
 			
 			
 			ind++;
 			
-		}
+		}*/
 		
 		return verifCP ;
 		
@@ -150,11 +161,11 @@ public class GererCP {
 	* @param verifier
 	*	est le contenant de la methode verif
 	* @param compteur
-	* 	compteur nous permet de connaitre le nombre d'éléments présents dans le tableauCP 	
+	* 	compteur nous permet de connaitre le nombre d'Ã©lÃ©ments prÃ©sents dans le tableauCP 	
 	*/
-	//dans cette proc, nous gérons les quatres commandes possibles pour le programme GererCp, a savoir la creation, la lecture, la MAJ et l effacement
+	//dans cette proc, nous gÃ©rons les quatres commandes possibles pour le programme GererCp, a savoir la creation, la lecture, la MAJ et l effacement
 	//On gere egalement les cas de doublons pour creation, les cas d'absence pour delete, etc.
-	//Puis on réaffiche la liste suivant les modifications effectuées.
+	//Puis on rÃ©affiche la liste suivant les modifications effectuÃ©es.
 	public static void procCRUD(String args[],String tableauCP[],String tableauNomVilles[],boolean verifier,int position,int compteur){
 		
 		
@@ -163,10 +174,10 @@ public class GererCP {
 		{
 			case "R" :
 				if (!verifier){
-					System.out.println("Ce code postal n'a pas encore été créé ! : " + args[1]);
+					System.out.println("Ce code postal n'a pas encore Ã©tÃ© crÃ©Ã© ! : " + args[1]);
 				}
 				else{
-					System.out.println(args[1] + " correspond à " + tableauNomVilles[position]);
+					System.out.println(args[1] + " correspond Ã  " + tableauNomVilles.get(position);
 				}
 				affichEtoile();
 				break;
@@ -174,7 +185,7 @@ public class GererCP {
 			case "C" :
 				verifVille(args);
 				if(verifier){
-					System.out.println("Ce code postal existe déja : " + tableauCP[position]);
+					System.out.println("Ce code postal existe dÃ©ja : " + tableauCP.get(position));
 				}
 				else{
 					System.out.println("creation " + args[1]);
@@ -193,13 +204,13 @@ public class GererCP {
 				
 				verifVille(args);
 				if(verifier){
-					System.out.println("modification " + tableauCP[position]);
+					System.out.println("modification " + tableauCP.get(position));
 					affichEtoile();
 					tableauNomVilles[position] = args[2] ;
 					affichListe(tableauCP,tableauNomVilles,position);
 				}
 				else {
-					System.out.println(args[1] +" n'existe pas dans nos données ! ");
+					System.out.println(args[1] +" n'existe pas dans nos donnÃ©es ! ");
 				}
 				
 				affichEtoile();
@@ -211,15 +222,17 @@ public class GererCP {
 					
 					System.out.println("effacement de " + tableauCP[position]);
 					affichEtoile();
-					tableauCP[position] = "";
-					tableauNomVilles[position] = "";
+					
+					tableauCP.remove(position);
+					tableauNomVilles.remove(position) ;
+					
 					affichListe(tableauCP,tableauNomVilles,position);
 					
 				}
 				
 				else {
 					
-					System.out.println("Ce code postal n'existe pas et ne peut pas être effacé!");
+					System.out.println("Ce code postal n'existe pas et ne peut pas Ãªtre effacÃ©!");
 				}
 				
 				break;
@@ -235,33 +248,32 @@ public class GererCP {
 	* 
 	* @since v1
 	*/
-	//Ici, on procure juste l'affichage souhaité par le client!
+	//Ici, on procure juste l'affichage souhaitÃ© par le client!
 	public static void affichEtoile(){
 		
 		System.out.println("*****");
 		
 	}
 	
-	//La procédure suivante permet de fermer le programme si jamais les paramètres obligatoires n'ont pas été saisis !
+	//La procÃ©dure suivante permet de fermer le programme si jamais les paramÃ¨tres obligatoires n'ont pas Ã©tÃ© saisis !
 	/**
-	*
 	*/
 	public static void verifparametres(String args[]){
 		if (args.length == 0){
-			System.out.println("Vous avez oublié les paramètres! lisez la doc ! ");
+			System.out.println("Vous avez oubliÃ© les paramÃ¨tres! lisez la doc ! ");
 			System.exit(0);
 			
 		}
 		else if(args.length == 1){
-			System.out.println("Vous avez oublié le paramètre secondaire");
+			System.out.println("Vous avez oubliÃ© le paramÃ¨tre secondaire");
 			System.exit(0);
 		}
 	}
 	
-	//La proc suivante vérifie que l'utilisateur a bien saisi le nom de la ville a creer / modifier ! Sinon , il quitte le programme !
+	//La proc suivante vÃ©rifie que l'utilisateur a bien saisi le nom de la ville a creer / modifier ! Sinon , il quitte le programme !
 	public static void verifVille(String args[]){
 		if(args.length < 3 ){
-					System.out.println("Vous avez oublié le nom de la ville !!");
+					System.out.println("Vous avez oubliÃ© le nom de la ville !!");
 					System.exit(0);
 				}
 	}
