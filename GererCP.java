@@ -33,8 +33,8 @@ public class GererCP {
 		*stocke les villes correspondants au CP
 		*
 		*/
-		tableauCP = new ArrayList <String>();
-		tableauNomVilles = new ArrayList <String>();
+		ArrayList<String> tableauCP = new ArrayList <String>();
+		ArrayList<String> tableauNomVilles = new ArrayList <String>();
 		tableauCP.add("97410");tableauCP.add("97420");tableauCP.add("97433");tableauCP.add("97413");tableauCP.add("97414");
 		tableauNomVilles.add("St-Pierre");tableauNomVilles.add("Port");tableauNomVilles.add("Salazie");tableauNomVilles.add("Cilaos");tableauNomVilles.add("Entre-Deux");
 		boolean verifier = false ;
@@ -70,7 +70,7 @@ public class GererCP {
 	*/
 	//Ici on doit gérer l'affichage des deux tableaux, et faire cette procédure de telle sorte qu'elle aura un argument nous permettant de selectionner en particulier
 	//un de ses éléments.
-	public static int affichListe(String tableauCP[],String tableauNomVilles[],int position ){
+	public static int affichListe(ArrayList tableauCP,ArrayList tableauNomVilles,int position ){
 		
 		int compteur = 0 ;
 		
@@ -94,7 +94,7 @@ public class GererCP {
 	* @return la position du Code Postal dans le tableau
 	*/
 	//Ici, dans le cas où le CP est correct , on marque la position de ce dernier dans le tableau de CP pour pouvoir y acceder facilement avec procCRUD() par la suite
-	public static int avoirPosition(String args[],String tableauCP[]){
+	public static int avoirPosition(String args[],ArrayList tableauCP){
 		
 		int ind = 0 ;
 		int positionCP = -1;
@@ -123,7 +123,7 @@ public class GererCP {
 	* @param tableauCP
 	*/
 	//Verifie que le parametre args[1] est bien present dans le tableau cp. renvoie un résultat booléen
-	public static boolean verif(String args[] ,String tableauCP[] ){
+	public static boolean verif(String args[] ,ArrayList tableauCP ){
 		
 		
 		int ind = 0 ;
@@ -166,7 +166,7 @@ public class GererCP {
 	//dans cette proc, nous gérons les quatres commandes possibles pour le programme GererCp, a savoir la creation, la lecture, la MAJ et l effacement
 	//On gere egalement les cas de doublons pour creation, les cas d'absence pour delete, etc.
 	//Puis on réaffiche la liste suivant les modifications effectuées.
-	public static void procCRUD(String args[],String tableauCP[],String tableauNomVilles[],boolean verifier,int position,int compteur){
+	public static void procCRUD(String args[],ArrayList tableauCP,ArrayList tableauNomVilles,boolean verifier,int position,int compteur){
 		
 		
 		
@@ -177,7 +177,7 @@ public class GererCP {
 					System.out.println("Ce code postal n'a pas encore été créé ! : " + args[1]);
 				}
 				else{
-					System.out.println(args[1] + " correspond à " + tableauNomVilles.get(position);
+					System.out.println(args[1] + " correspond à " + tableauNomVilles.get(position));
 				}
 				affichEtoile();
 				break;
